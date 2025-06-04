@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registration - Info Portal</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #87ceeb, #b0e0e6);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #006994;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #87ceeb;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+      border-color: #006994;
+      outline: none;
+    }
+    select[multiple] {
+      height: 120px;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      background-color: #006994;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #004f66;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register Account</h2>
+    <form action="register.php" method="POST">
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" placeholder="example@mail.com" required />
+
+      <label for="password">Password *</label>
+      <input type="password" id="password" name="password" placeholder="Choose a strong password" required />
+
+      <label for="role">Role *</label>
+      <select id="role" name="role" required>
+        <option value="" disabled selected>Select role</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <label for="subjects">Select Subjects:</label><br>
+    <select name="subjects[]" id="subjects" multiple required>
+        <option value="1">Mathematics[1]</option>
+        <option value="2">Physics[2]</option>
+        <option value="3">Chemistry[3]</option>
+        <option value="4">Biology[4]</option>
+        <option value="5">Computer Science[5]</option>
+    </select>
+
+      <div class="note">Hold Ctrl (Cmd on Mac) to select multiple subjects</div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>
