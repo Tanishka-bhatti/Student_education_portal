@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // DB connection variables
@@ -131,6 +132,12 @@ $conn->close();
 <body>
 
 <div class="login-container">
+    <?php if (isset($_GET['message']) && $_GET['message'] == 'registered'): ?>
+  <div style="background: #e0ffe0; padding: 10px; border: 1px solid #00a300; color: #006600; margin-bottom: 15px; border-radius: 6px; text-align:center;">
+    Registration successful! Please login below.
+  </div>
+<?php endif; ?>
+
     <h2>Login</h2>
     <form method="POST" action="">
         <label for="email">Email:</label>
@@ -143,7 +150,7 @@ $conn->close();
     </form>
 
     <div class="register-link">
-        New user? <a href="register.html">Register here</a>
+        New user? <a href="register.php">Register here</a>
     </div>
 </div>
 

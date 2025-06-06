@@ -38,10 +38,29 @@ $levels_count = 10;
     <title>Levels for <?php echo htmlspecialchars($subject['name']); ?></title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; background: #e0f7fa; }
-        h1 { color: #0277bd; }
+        h1 { color: #0277bd; margin-bottom: 25px; }
         .level-container { border: 1px solid #0277bd; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #b3e5fc; }
-        .file { background: #81d4fa; padding: 10px; margin: 8px 0; border-radius: 5px; cursor: pointer; }
-        .file:hover { background: #4fc3f7; color: white; }
+        .file-button {
+            display: inline-block;
+            margin-right: 12px;
+            margin-bottom: 10px;
+            padding: 10px 18px;
+            background: #0277bd;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .file-button:hover {
+            background: #004f7a;
+            color: #ccefff;
+        }
+        .nofile {
+            color: #a00;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -53,9 +72,21 @@ for ($level = 1; $level <= $levels_count; $level++) {
     echo "<div class='level-container'>";
     echo "<h2>Level $level</h2>";
     
-    echo "<div class='file'>Question Worksheet</div>";
-    echo "<div class='file'>Answer Key</div>";
-    echo "<div class='file'>Other File</div>";
+    $uploadDir = "uploads/subject_$subject_id/level_$level/";
+    $files = ['question_worksheet', 'answer_key', 'other_file'];
+    foreach ($files as $fileKey) {
+        $filePaths = glob($uploadDir . $fileKey . '.*'); // any extension
+
+        if (!empty($filePaths)) {
+            foreach ($filePaths as $filePath) {
+                $fileName = basename($filePath);
+                // Use relative path for href
+                echo "<a href='$filePath' target='_blank' class='file-button' rel='noopener noreferrer'>".ucwords(str_replace('_',' ',$fileKey))."</a>";
+            }
+        } else {
+            echo "<div class='nofile'>" . ucwords(str_replace('_',' ',$fileKey)) . " not uploaded yet.</div>";
+        }
+    }
     
     echo "</div>";
 }
